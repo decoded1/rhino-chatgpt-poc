@@ -1,0 +1,14 @@
+{
+  "protocol_version": "0.2",
+  "operator": "codex",
+  "repository": "decoded1/rhino-chatgpt-poc",
+  "local_path": "/Users/nes/Projects/rhino-chatgpt-poc",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "branch": "main",
+  "current_commit": "811edb1e49aa12d6d224cd004d96c7f900521d28",
+  "remote_url": "https://github.com/decoded1/rhino-chatgpt-poc.git",
+  "git_available": true,
+  "gh_available": true,
+  "codex_available": true,
+  "checked_at": "2026-09-24T09:03:29.727365Z"
+}
