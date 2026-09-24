@@ -1,0 +1,66 @@
+{
+  "protocol_version": "0.3",
+  "task_id": "bridge-phase5-001",
+  "checked_at": "2026-09-24T09:31:59.059029Z",
+  "real_repo": "NESDUB/rhino-cad-mcp",
+  "real_local_path": "/Users/nes/bin/mcp/rhino-cad-mcp",
+  "real_base_commit": "b54161746c5919a4a52074c1b7a48debd96b5fc3",
+  "real_operator_branch": "operator/bridge-bootstrap-v1",
+  "real_result_commit": "3fa9ef6959d57b9695aab17a344b1a1a5debb00d",
+  "files_added": [
+    ".bridge/README.md",
+    ".bridge/bridge_cli.py",
+    ".bridge/protocol.json",
+    ".bridge/state/controller.json",
+    ".bridge/templates/operator-report-v0.3.json",
+    "exchange.sh"
+  ],
+  "files_modified": [
+    ".gitignore"
+  ],
+  "runtime_files_modified": [],
+  "validations": [
+    {
+      "command": "bash -n exchange.sh",
+      "passed": true
+    },
+    {
+      "command": "python3 -m py_compile .bridge/bridge_cli.py",
+      "passed": true
+    },
+    {
+      "command": "python3 .bridge/bridge_cli.py status",
+      "passed": true,
+      "output": [
+        "protocol=0.3",
+        "requests=0",
+        "pending=0",
+        "reports=0"
+      ]
+    },
+    {
+      "command": "git diff --check",
+      "passed": true
+    },
+    {
+      "check": ".venv/ absent from git status after ignore update",
+      "passed": true
+    },
+    {
+      "check": "Only .gitignore, the six requested control-plane files, and exchange.sh changed before commit",
+      "passed": true
+    },
+    {
+      "check": "server.py, bridge.py, runtime_ops.py, tool_support.py, snippets.py, test_bridge.py, requirements.txt, knowledge/, and tests unchanged from origin/main",
+      "passed": true
+    }
+  ],
+  "push_verified": true,
+  "remote_operator_commit": "3fa9ef6959d57b9695aab17a344b1a1a5debb00d",
+  "main_unchanged": true,
+  "remote_main_commit": "b54161746c5919a4a52074c1b7a48debd96b5fc3",
+  "live_rhino_tests_run": false,
+  "dependencies_installed": false,
+  "venv_deleted_moved_staged_or_modified": false,
+  "blockers": []
+}
