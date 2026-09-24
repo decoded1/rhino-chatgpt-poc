@@ -1,0 +1,34 @@
+{
+  "protocol_version": "0.3",
+  "task_id": "bridge-phase3-001",
+  "status": "queued",
+  "controller": "chatgpt-web",
+  "challenge": "BRIDGE-V03-20260924-6B4D92",
+  "objective": "Validate safe operator task branching, base/result commit tracking, and controller-review handoff without touching Rhino.",
+  "operator_branch": "operator/bridge-phase3-001",
+  "instructions": [
+    "From local main, run ./exchange.sh and confirm this request is discovered from GitHub.",
+    "Run ./exchange.sh prepare bridge-phase3-001. It must create operator/bridge-phase3-001 from origin/main and must not modify main.",
+    "Measure the local state and create .bridge/state/operator-v03.json containing protocol_version, operator, repository, local_path, platform, branch, base_commit, remote_url, git_available, gh_available, codex_available, and checked_at. Do not invent values.",
+    "Commit .bridge/state/operator-v03.json as the task work commit. Capture that 40-character commit SHA as RESULT_COMMIT.",
+    "Create .bridge/reports/bridge-phase3-001.json following the v0.3 report template. Set base_commit to the exact commit printed by exchange.sh prepare. Set result_commit to RESULT_COMMIT. Set branch to operator/bridge-phase3-001. Set ack exactly to BRIDGE-V03-20260924-6B4D92-OPERATOR-ACK.",
+    "Run python3 .bridge/bridge_cli.py verify-report bridge-phase3-001 and require REPORT_OK before continuing.",
+    "Commit the report as a second receipt commit after the work commit.",
+    "Push operator/bridge-phase3-001 to origin. Do not merge it to main and do not push task changes directly to main.",
+    "Return a concise summary with branch name, base commit, result commit, receipt commit, and push status."
+  ],
+  "expected_outputs": [
+    ".bridge/state/operator-v03.json on the operator branch",
+    ".bridge/reports/bridge-phase3-001.json on the operator branch",
+    "A work commit referenced by result_commit",
+    "A later receipt commit containing the report",
+    "Remote branch operator/bridge-phase3-001"
+  ],
+  "constraints": [
+    "Do not test Rhino or modify rhino-cad-mcp.",
+    "Do not discard or overwrite local work.",
+    "Do not force push.",
+    "Do not merge the operator branch.",
+    "Do not change bridge architecture unless a concrete bug blocks the test; if blocked, report the exact evidence."
+  ]
+}

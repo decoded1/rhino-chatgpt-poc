@@ -1,8 +1,10 @@
 {
-  "protocol_version": "0.2",
+  "protocol_version": "0.3",
   "controller": "chatgpt-web",
   "repository": "decoded1/rhino-chatgpt-poc",
   "branch": "main",
-  "latest_request": "bridge-phase2-001",
-  "transport_verified": true
+  "latest_request": "bridge-phase3-001",
+  "transport_verified": true,
+  "structured_exchange_verified": true,
+  "task_branch_safety_under_test": true
 }
