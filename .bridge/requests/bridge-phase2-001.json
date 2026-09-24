@@ -1,0 +1,27 @@
+{
+  "protocol_version": "0.2",
+  "task_id": "bridge-phase2-001",
+  "status": "queued",
+  "controller": "chatgpt-web",
+  "challenge": "BRIDGE-V02-20260924-8E72C1",
+  "objective": "Validate the structured Git bridge protocol on the local Codex machine.",
+  "instructions": [
+    "Run ./exchange.sh and confirm it discovers this request from GitHub.",
+    "Do not test Rhino or modify the Rhino MCP in this phase.",
+    "Create .bridge/state/operator.json using facts measured from the local machine: operator, repository, local_path, platform, branch, current_commit, remote_url, git_available, gh_available, codex_available, and checked_at.",
+    "Create .bridge/reports/bridge-phase2-001.json following the operator report template.",
+    "Set the report ack exactly to BRIDGE-V02-20260924-8E72C1-OPERATOR-ACK.",
+    "Validate the report with: python3 .bridge/bridge_cli.py verify-report bridge-phase2-001.",
+    "Commit all operator-produced state/report changes and push them to main."
+  ],
+  "expected_outputs": [
+    ".bridge/state/operator.json",
+    ".bridge/reports/bridge-phase2-001.json"
+  ],
+  "constraints": [
+    "Do not invent machine facts.",
+    "Do not discard local work.",
+    "Do not change bridge architecture unless a concrete bug prevents the test.",
+    "If blocked, write a blocked report with the exact blocker and push it if possible."
+  ]
+}

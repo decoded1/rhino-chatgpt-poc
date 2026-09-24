@@ -1,0 +1,8 @@
+{
+  "protocol_version": "0.2",
+  "controller": "chatgpt-web",
+  "repository": "decoded1/rhino-chatgpt-poc",
+  "branch": "main",
+  "latest_request": "bridge-phase2-001",
+  "transport_verified": true
+}
