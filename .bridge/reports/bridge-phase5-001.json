@@ -1,0 +1,33 @@
+{
+  "protocol_version": "0.3",
+  "task_id": "bridge-phase5-001",
+  "status": "complete",
+  "operator": "codex",
+  "ack": "BRIDGE-PHASE5-20260924-3FD8B2-OPERATOR-ACK",
+  "base_commit": "501a5986093216b43ef709539528b293aba0d119",
+  "result_commit": "17442e5b9755d52e04cef8ddf0d728d9f20595cd",
+  "branch": "operator/bridge-phase5-001",
+  "summary": "Bootstrapped the proven protocol-v0.3 Git control plane into NESDUB/rhino-cad-mcp on isolated branch operator/bridge-bootstrap-v1, preserved the existing Rhino/MCP runtime implementation, pushed the real operator branch, and recorded verified results in the POC branch.",
+  "files_changed": [
+    ".bridge/evidence/bridge-phase5-001/bootstrap-result.json",
+    ".bridge/reports/bridge-phase5-001.json"
+  ],
+  "tests": [
+    "Real repo: bash -n exchange.sh \u2014 passed",
+    "Real repo: python3 -m py_compile .bridge/bridge_cli.py \u2014 passed",
+    "Real repo: python3 .bridge/bridge_cli.py status \u2014 protocol=0.3, requests=0, pending=0, reports=0",
+    "Real repo: git diff --check \u2014 passed",
+    "Real repo: .venv/ absent from git status after ignore update",
+    "Real repo: protected Rhino/MCP runtime paths unchanged from origin/main",
+    "Real repo: remote operator/bridge-bootstrap-v1 verified at 3fa9ef6959d57b9695aab17a344b1a1a5debb00d",
+    "Real repo: remote main verified unchanged at b54161746c5919a4a52074c1b7a48debd96b5fc3",
+    "POC: python3 -m json.tool .bridge/evidence/bridge-phase5-001/bootstrap-result.json \u2014 passed",
+    "POC: python3 .bridge/bridge_cli.py verify-report bridge-phase5-001 \u2014 REPORT_OK"
+  ],
+  "blockers": [],
+  "notes_for_controller": [
+    "No dependencies were installed and no live Rhino geometry test was run.",
+    "The existing .venv/ was not deleted, moved, staged, or modified.",
+    "Neither operator branch was merged."
+  ]
+}
