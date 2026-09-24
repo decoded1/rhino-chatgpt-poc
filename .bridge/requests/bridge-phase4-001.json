@@ -1,0 +1,37 @@
+{
+  "protocol_version": "0.3",
+  "task_id": "bridge-phase4-001",
+  "status": "queued",
+  "controller": "chatgpt-web",
+  "challenge": "BRIDGE-PHASE4-20260924-19C7A4",
+  "objective": "Perform a read-only migration-readiness inspection of the real rhino-cad-mcp project and return machine-grounded evidence through the proven bridge.",
+  "operator_branch": "operator/bridge-phase4-001",
+  "instructions": [
+    "From local main of decoded1/rhino-chatgpt-poc, run ./exchange.sh and confirm this request is discovered.",
+    "Run ./exchange.sh prepare bridge-phase4-001 and work only on operator/bridge-phase4-001 in the POC repository.",
+    "Inspect /Users/nes/bin/mcp/rhino-cad-mcp read-only. Do not edit, initialize, commit, push, install, or otherwise mutate that real project in this task.",
+    "Measure and record: whether the path exists; whether it is a Git worktree; current branch; HEAD commit if any; working-tree cleanliness; remotes; default/upstream branch if determinable; top-level file and directory names; presence of server.py, bridge.py, snippets.py, test_bridge.py, README.md, CLAUDE.md, AGENTS.md, requirements.txt, .gitignore, .github, .codex, knowledge, and any existing bridge/sync/exchange scripts.",
+    "Inspect relevant project documentation and source structure enough to identify where the Git bridge can be integrated without replacing working MCP/Rhino behavior. Do not dump secrets. If secret-like files exist, report only their paths/names and exclusion recommendation, never their contents.",
+    "Record measured local tool facts relevant to migration: git availability/version, gh availability/version and authenticated account, python3 version, codex availability/version if queryable, Rhino 8 app existence, rhinocode existence, and current Codex MCP registration for rhino-cad-mcp if safely queryable.",
+    "Identify any migration blockers such as dirty worktree, existing unrelated remote, conflicting filenames, absolute-path assumptions, or credentials/transient runtime files that must stay out of Git.",
+    "Create .bridge/evidence/bridge-phase4-001/migration-readiness.json in the POC task branch. Include facts, integration_points, blockers, exclusions, and recommended_migration_steps. Distinguish measured facts from recommendations.",
+    "Commit the evidence file as the task work commit and capture its 40-character SHA as RESULT_COMMIT.",
+    "Create .bridge/reports/bridge-phase4-001.json following the v0.3 operator report schema. Set ack exactly to BRIDGE-PHASE4-20260924-19C7A4-OPERATOR-ACK, set base_commit to the prepare base commit, result_commit to RESULT_COMMIT, and branch to operator/bridge-phase4-001.",
+    "Run python3 .bridge/bridge_cli.py verify-report bridge-phase4-001 and require REPORT_OK.",
+    "Commit the report as a separate receipt commit after the work commit.",
+    "Push operator/bridge-phase4-001 to origin. Do not merge it and do not modify the real rhino-cad-mcp repository."
+  ],
+  "expected_outputs": [
+    ".bridge/evidence/bridge-phase4-001/migration-readiness.json",
+    ".bridge/reports/bridge-phase4-001.json",
+    "Remote branch operator/bridge-phase4-001"
+  ],
+  "constraints": [
+    "Read-only inspection of /Users/nes/bin/mcp/rhino-cad-mcp.",
+    "Do not reveal secret contents.",
+    "Do not initialize or alter Git in the real project.",
+    "Do not modify Rhino or run geometry-changing tests.",
+    "Do not force push.",
+    "Do not merge the operator branch."
+  ]
+}
