@@ -1,0 +1,42 @@
+{
+  "protocol_version": "0.3",
+  "task_id": "bridge-phase5-001",
+  "status": "queued",
+  "controller": "chatgpt-web",
+  "challenge": "BRIDGE-PHASE5-20260924-3FD8B2",
+  "objective": "Bootstrap the proven Git control plane into the real NESDUB/rhino-cad-mcp repository on an isolated operator branch, without changing Rhino/MCP runtime behavior.",
+  "operator_branch": "operator/bridge-phase5-001",
+  "instructions": [
+    "From local main of decoded1/rhino-chatgpt-poc, run ./exchange.sh and confirm this request is discovered.",
+    "Run ./exchange.sh prepare bridge-phase5-001 and keep the POC task work on operator/bridge-phase5-001.",
+    "In /Users/nes/bin/mcp/rhino-cad-mcp, fetch origin and verify origin/main is b54161746c5919a4a52074c1b7a48debd96b5fc3 or report any divergence before proceeding.",
+    "Verify there are no tracked local modifications in the real repository. The known untracked .venv/ must not be deleted, moved, staged, or modified.",
+    "Create a new real-repository branch named operator/bridge-bootstrap-v1 from origin/main. Do not modify or push main.",
+    "Update the real repository .gitignore conservatively so .venv/ is ignored, while preserving existing entries. Also add preventive ignores for .env, .env.*, *.pem, *.key, *.p12, and *.pfx. Do not ignore existing tracked source/test files.",
+    "Port only the proven out-of-process bridge control plane into the real repository: .bridge/protocol.json, .bridge/README.md, .bridge/bridge_cli.py, .bridge/templates/operator-report-v0.3.json, .bridge/state/controller.json, and exchange.sh. Do not copy POC request/report/evidence history.",
+    "Adapt the copied bridge metadata for repository NESDUB/rhino-cad-mcp. Preserve protocol version 0.3 and the safe operator-branch model. The Git bridge must remain independent of server.py, bridge.py, runtime_ops.py, tool_support.py, snippets.py, knowledge/, and Rhino runtime imports.",
+    "Do not modify server.py, bridge.py, runtime_ops.py, tool_support.py, snippets.py, test_bridge.py, requirements.txt, knowledge/, or existing tests in this phase.",
+    "Validate the real-repository bootstrap with: bash -n exchange.sh; python3 -m py_compile .bridge/bridge_cli.py; python3 .bridge/bridge_cli.py status; git diff --check. Do not run live Rhino tests and do not install dependencies.",
+    "Verify .venv/ no longer appears in git status after the ignore update, and verify the real worktree contains only the intentional bridge/bootstrap changes before commit.",
+    "Commit the real-repository bootstrap as one work commit and push only operator/bridge-bootstrap-v1 to origin. Do not merge it.",
+    "In the POC task branch, create .bridge/evidence/bridge-phase5-001/bootstrap-result.json recording measured facts: real_repo, real_base_commit, real_operator_branch, real_result_commit, files_added, files_modified, validations, push_verified, main_unchanged, and any blockers.",
+    "Commit the POC evidence as the POC task work commit and capture that SHA as RESULT_COMMIT.",
+    "Create .bridge/reports/bridge-phase5-001.json following the v0.3 report schema. Set ack exactly to BRIDGE-PHASE5-20260924-3FD8B2-OPERATOR-ACK, set base_commit to the POC prepare base commit, result_commit to the POC RESULT_COMMIT, and branch to operator/bridge-phase5-001.",
+    "Run python3 .bridge/bridge_cli.py verify-report bridge-phase5-001 and require REPORT_OK.",
+    "Commit the POC report as a receipt commit and push operator/bridge-phase5-001. Do not merge either the POC operator branch or the real repository operator branch."
+  ],
+  "expected_outputs": [
+    "Remote branch NESDUB/rhino-cad-mcp:operator/bridge-bootstrap-v1",
+    "Real repository bridge bootstrap commit with no runtime code changes",
+    ".bridge/evidence/bridge-phase5-001/bootstrap-result.json in the POC operator branch",
+    ".bridge/reports/bridge-phase5-001.json in the POC operator branch"
+  ],
+  "constraints": [
+    "Do not delete or recreate .venv/.",
+    "Do not change real repository main.",
+    "Do not change Rhino/MCP runtime implementation files.",
+    "Do not install dependencies or run live Rhino geometry tests.",
+    "Do not force push.",
+    "Do not merge either operator branch."
+  ]
+}
