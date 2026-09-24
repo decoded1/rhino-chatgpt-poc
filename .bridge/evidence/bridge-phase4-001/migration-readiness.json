@@ -1,0 +1,268 @@
+{
+  "protocol_version": "0.3",
+  "task_id": "bridge-phase4-001",
+  "inspection": {
+    "mode": "read-only",
+    "inspected_path": "/Users/nes/bin/mcp/rhino-cad-mcp",
+    "checked_at": "2026-09-24T09:26:08.994297Z",
+    "rhino_geometry_tests_run": false,
+    "real_project_modified": false
+  },
+  "facts": {
+    "project": {
+      "path_exists": true,
+      "is_git_worktree": true,
+      "git_dir": ".git",
+      "branch": "main",
+      "head_commit": "b54161746c5919a4a52074c1b7a48debd96b5fc3",
+      "working_tree_clean": false,
+      "tracked_changes_clean": true,
+      "untracked_file_count": 1478,
+      "untracked_top_level_counts": {
+        ".venv": 1478
+      },
+      "status_summary": [
+        "?? .venv/"
+      ],
+      "upstream_branch": "origin/main",
+      "remote_default_ref": "refs/remotes/origin/main",
+      "remotes": [
+        {
+          "name": "origin",
+          "fetch_url": "https://github.com/NESDUB/rhino-cad-mcp.git",
+          "push_url": "https://github.com/NESDUB/rhino-cad-mcp.git"
+        }
+      ]
+    },
+    "top_level_names": [
+      ".DS_Store",
+      ".git",
+      ".gitignore",
+      ".venv",
+      "CLAUDE.md",
+      "README.md",
+      "__pycache__",
+      "backups",
+      "bridge.py",
+      "knowledge",
+      "requirements.txt",
+      "runtime_ops.py",
+      "server.py",
+      "snippets.py",
+      "test_bridge.py",
+      "tests",
+      "tool_support.py"
+    ],
+    "requested_path_presence": {
+      "server.py": true,
+      "bridge.py": true,
+      "snippets.py": true,
+      "test_bridge.py": true,
+      "README.md": true,
+      "CLAUDE.md": true,
+      "AGENTS.md": false,
+      "requirements.txt": true,
+      ".gitignore": true,
+      ".github": false,
+      ".codex": false,
+      "knowledge": true
+    },
+    "existing_bridge_sync_exchange_paths": [
+      "bridge.py",
+      "test_bridge.py",
+      "backups/pre-enhancements-20260920/bridge.py",
+      "backups/pre-enhancements-20260920/test_bridge.py"
+    ],
+    "existing_sync_or_exchange_scripts": [],
+    "source_structure": {
+      "documented_architecture": "MCP stdio -> server.py -> bridge.py -> rhinocode -> Rhino 8 / Grasshopper",
+      "server_role": "Thin MCP tool surface importing transport operations from bridge.py and runtime helpers from tool_support.py.",
+      "bridge_role": "Host-side rhinocode transport, discovery, target selection, persistent jobs, result-file handshakes, timeout handling, and exception capture.",
+      "supporting_modules": {
+        "runtime_ops.py": "Host/Rhino operation implementations used by the MCP tool layer.",
+        "tool_support.py": "Tool targeting, runtime dispatch, and code checks.",
+        "snippets.py": "Reusable Rhino/Grasshopper inspection payloads.",
+        "knowledge/": "Bundled Grasshopper capability and compatibility knowledge.",
+        "tests/": "Regression, compatibility, extraction, viewport, and live-integration tests."
+      },
+      "requirements": [
+        "mcp"
+      ],
+      "rhino_runtime_python_contract": "Python 3.9-compatible payloads",
+      "host_job_directory_default": "~/Library/Caches/rhino-cad-mcp/jobs"
+    },
+    "path_assumptions": [
+      {
+        "path": "bridge.py",
+        "fact": "RHINOCODE defaults to /Applications/Rhino 8.app/Contents/Resources/bin/rhinocode and is overrideable with RHINOCODE_PATH."
+      },
+      {
+        "path": "bridge.py",
+        "fact": "Persistent jobs default to ~/Library/Caches/rhino-cad-mcp/jobs and are overrideable with RHINO_MCP_JOB_DIR."
+      },
+      {
+        "path": "tests/ and tracked test receipts",
+        "fact": "Multiple JSON fixtures and receipts contain absolute /Users/nes/bin/mcp/rhino-cad-mcp paths."
+      }
+    ],
+    "secret_like_path_scan": {
+      "patterns": [
+        ".env*",
+        "*secret*",
+        "*credential*",
+        "*token*",
+        "*.pem",
+        "*.key",
+        "*.p12",
+        "*.pfx"
+      ],
+      "max_depth": 5,
+      "matches": [],
+      "claim_scope": "Filename/path scan only; file contents were not treated as proof that secrets are absent."
+    },
+    "local_tools": {
+      "git": {
+        "available": true,
+        "path": "/usr/bin/git",
+        "version": "git version 2.54.0 (Apple Git-157)"
+      },
+      "gh": {
+        "available": true,
+        "path": "/opt/homebrew/bin/gh",
+        "version": "gh version 2.96.0 (2026-07-02)",
+        "authenticated": true,
+        "active_account": "decoded1",
+        "other_configured_account": "NESDUB",
+        "token_contents_recorded": false
+      },
+      "python3": {
+        "available": true,
+        "path": "/opt/homebrew/bin/python3",
+        "version": "Python 3.14.4"
+      },
+      "codex": {
+        "available": true,
+        "path": "/opt/homebrew/bin/codex",
+        "version": "codex-cli 0.156.1"
+      },
+      "rhino_8": {
+        "app_exists": true,
+        "path": "/Applications/Rhino 8.app"
+      },
+      "rhinocode": {
+        "exists": true,
+        "path": "/Applications/Rhino 8.app/Contents/Resources/bin/rhinocode",
+        "available_on_shell_path": false
+      },
+      "codex_mcp_registration": {
+        "rhino-cad-mcp_registered": false,
+        "query_result": "No MCP server named 'rhino-cad-mcp' found.",
+        "related_registered_server": "rhino-atlas"
+      }
+    }
+  },
+  "integration_points": [
+    {
+      "location": "repository root/.bridge/",
+      "recommendation": "Add the durable Git controller/operator protocol as a separate control-plane directory; .bridge does not currently exist and does not collide with Rhino runtime modules."
+    },
+    {
+      "location": "repository root/exchange.sh",
+      "recommendation": "Add synchronization and operator-branch preparation outside the MCP runtime; no existing sync or exchange script was found."
+    },
+    {
+      "location": "server.py and bridge.py boundary",
+      "recommendation": "Leave server.py as the thin MCP surface and bridge.py as the rhinocode transport. The Git bridge should orchestrate work around them, not replace or import into them."
+    },
+    {
+      "location": "tool_support.py, runtime_ops.py, snippets.py, knowledge/",
+      "recommendation": "Treat these as existing application components and migration payload; preserve their imports and Rhino/Grasshopper semantics unchanged during transport migration."
+    },
+    {
+      "location": ".github/ and .codex/",
+      "recommendation": "These paths are absent and can be introduced later for review policy or Codex-specific metadata only after the basic Git exchange is proven in the real repository."
+    }
+  ],
+  "blockers": [
+    {
+      "id": "dirty-untracked-venv",
+      "severity": "high",
+      "evidence": "The tracked tree is clean, but Git reports ?? .venv/ containing 1,478 untracked files.",
+      "impact": "Safe branch preparation and migration tooling should not proceed until the virtual environment is explicitly excluded or otherwise handled without deleting it."
+    },
+    {
+      "id": "existing-origin-ownership",
+      "severity": "medium",
+      "evidence": "origin already points to https://github.com/NESDUB/rhino-cad-mcp.git on main with upstream origin/main.",
+      "impact": "The intended controller-visible owner/remote must be selected deliberately; do not overwrite the existing remote implicitly."
+    },
+    {
+      "id": "bridge-name-collision",
+      "severity": "high",
+      "evidence": "bridge.py and test_bridge.py are active Rhino transport files; backup copies also exist.",
+      "impact": "A generic Git bridge named bridge.py would overwrite working MCP/Rhino behavior. Use .bridge/ and exchange.sh instead."
+    },
+    {
+      "id": "absolute-path-artifacts",
+      "severity": "medium",
+      "evidence": "Tracked test fixtures and receipts contain /Users/nes/bin/mcp/rhino-cad-mcp paths; bridge.py also has a macOS Rhino default path, although RHINOCODE_PATH can override it.",
+      "impact": "Migration validation must distinguish configurable runtime defaults from machine-specific generated artifacts."
+    },
+    {
+      "id": "codex-registration-name",
+      "severity": "medium",
+      "evidence": "codex mcp get rhino-cad-mcp reports that no server with that name is registered; rhino-atlas is registered separately.",
+      "impact": "The intended MCP registration name and launch command must be confirmed before cutover."
+    }
+  ],
+  "exclusions": [
+    {
+      "paths": [
+        ".venv/",
+        "__pycache__/",
+        "*.pyc",
+        ".DS_Store"
+      ],
+      "reason": "Local environment and generated cache/metadata files; .venv is presently untracked and not ignored."
+    },
+    {
+      "paths": [
+        ".env",
+        ".env.*",
+        "*.pem",
+        "*.key",
+        "*.p12",
+        "*.pfx",
+        "*credential*",
+        "*token*",
+        "*secret*"
+      ],
+      "reason": "Credential and secret-bearing candidates must remain out of Git; no matching paths were found in the bounded filename scan, but exclusions should be preventive."
+    },
+    {
+      "paths": [
+        "~/Library/Caches/rhino-cad-mcp/jobs"
+      ],
+      "reason": "Persistent transient job state lives outside the repository and can contain runtime scripts/results; never migrate it as source."
+    },
+    {
+      "paths": [
+        "new viewport captures",
+        "new .3dm test scenes",
+        "new machine-specific test receipts"
+      ],
+      "reason": "Generated validation artifacts need an explicit artifact-retention policy and path normalization before being committed."
+    }
+  ],
+  "recommended_migration_steps": [
+    "Preserve the current real repository and remote; perform all migration work on a new operator branch from a verified clean base.",
+    "Before branch automation, update ignore policy to exclude .venv/, environment/credential patterns, caches, and transient runtime artifacts without deleting local data.",
+    "Resolve the intended repository owner and remote relationship between NESDUB/rhino-cad-mcp and the controller-visible decoded1 account before changing origin.",
+    "Port the proven .bridge/ protocol and exchange.sh as an out-of-process control plane; do not replace bridge.py or alter server.py imports.",
+    "Preserve RHINOCODE_PATH and RHINO_MCP_JOB_DIR overrides; classify or normalize tracked test artifacts containing /Users/nes absolute paths.",
+    "Add a migration request that records base/result/receipt commits and requires review on an operator branch before any merge.",
+    "Confirm the desired Codex MCP registration name and launch command, then register or update it only after repository migration is reviewed.",
+    "Run non-mutating schema/import checks first; defer live Rhino geometry tests until a separately authorized phase with Rhino state inspection and validation safeguards.",
+    "Review and merge through GitHub only after controller verification; retain the existing MCP/Rhino implementation as the rollback point."
+  ]
+}
